@@ -64,6 +64,9 @@ def not_found_error(error):
 def not_allowed_error(error):
     print(str(error))
 
+    
+app.debug = True
+
 if not app.debug:
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(
