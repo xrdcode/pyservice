@@ -9,6 +9,7 @@ flask = "*"
 opencv-python = "*"
 numpy = "*"
 pytesseract = "*"
+gunicorn = "*"
 
 [dev-packages]
 

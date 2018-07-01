@@ -73,4 +73,4 @@ if not app.debug:
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host="0.0.0.0",port = int(5000))
+    app.run()
