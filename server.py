@@ -32,24 +32,24 @@ def upload():
     if not allowed(file.filename):
         return jsonify({"error":"unsupported file to uploads"})
     
-#try:
-    text = process_image(img=file.read())
-    return jsonify({"output":text})
-#except:
-    #return jsonify({"error": "something when wrong"})
+    try:
+        text = process_image(img=file.read())
+        return jsonify({"output":text})
+    except:
+        return jsonify({"error": "something when wrong"})
 
 @app.route('/extract_imgurl',methods=['POST'])
 def extract_text():
-#try:
-    url = request.json['image_url']
-    print(url.split('.')[-1])
-    if url.split('.')[-1] in ['jpg','png','tif']:
-        rec_string = process_image(url=url)
-        return jsonify({"output": rec_string })
-    else:
-        return jsonify({"error": "Not Support file types, please"})
-#except:
-    #return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
+    try:
+        url = request.json['image_url']
+        print(url.split('.')[-1])
+        if url.split('.')[-1] in ['jpg','png','tif']:
+            rec_string = process_image(url=url)
+            return jsonify({"output": rec_string })
+        else:
+            return jsonify({"error": "Not Support file types, please"})
+    except:
+        return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
 
 
 @app.errorhandler(500)
@@ -64,15 +64,16 @@ def not_found_error(error):
 def not_allowed_error(error):
     print(str(error))
 
-
-app.debug = True
-
 if not app.debug:
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(
         Formatter('%(asctime)s %(levelname)s: \
             %(message)s [in %(pathname)s:%(lineno)d]')
     )
+    app.logger.setLevel(logging.INFO)
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.info('errors')
 
 if __name__ == '__main__':
     app.debug = True
