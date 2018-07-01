@@ -7,15 +7,17 @@ import cv2 as cv
 import numpy as np
 from PIL import Image
 
-def process_image(url=None,path=None):
-    if url != None:
+def process_image(url=None,path=None,img=None):
+    print(type(img))
+    if img != None:
+        image = byte_to_image(img)
+    elif url != None:
         image = url_to_image(url)
     elif path != None:
         image = cv.imread(path)
     else:
         return "Wrong Wrong Wrong, What are you doing ??? "
 
-    print(url)
     gray = cv.cvtColor(image,cv.COLOR_RGB2GRAY)
     ret2,th2 = cv.threshold(gray,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
     dst = cv.fastNlMeansDenoising(th2,10,10,7)
@@ -32,3 +34,7 @@ def url_to_image(url):
     image = cv.imdecode(image, cv.IMREAD_COLOR)
     return image
 
+def byte_to_image(byt):
+    image = np.asarray(bytearray(byt),dtype="uint8")
+    image = cv.imdecode(image, cv.IMREAD_COLOR)
+    return image

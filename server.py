@@ -26,7 +26,19 @@ def allowed(filename):
 def index():
     return render_template('index.html')
 
-@app.route('/extract_text',methods=['POST'])
+@app.route('/extract',methods=['POST'])
+def upload():
+    file = request.files['file']
+    if not allowed(file.filename):
+        return jsonify({"error":"unsupported file to uploads"})
+    
+    try:
+        text = process_image(img=file.read())
+        return jsonify({"output":text})
+    except:
+        return jsonify({"error": "something when wrong"})
+
+@app.route('/extract_imgurl',methods=['POST'])
 def extract_text():
     try:
         url = request.json['image_url']
