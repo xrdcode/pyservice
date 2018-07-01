@@ -40,16 +40,16 @@ def upload():
 
 @app.route('/extract_imgurl',methods=['POST'])
 def extract_text():
-    try:
-        url = request.json['image_url']
-        print(url.split('.')[-1])
-        if url.split('.')[-1] in ['jpg','png','tif']:
-            rec_string = process_image(url=url)
-            return jsonify({"output": rec_string })
-        else:
-            return jsonify({"error": "Not Support file types, please"})
-    except:
-        return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
+#try:
+    url = request.json['image_url']
+    print(url.split('.')[-1])
+    if url.split('.')[-1] in ['jpg','png','tif']:
+        rec_string = process_image(url=url)
+        return jsonify({"output": rec_string })
+    else:
+        return jsonify({"error": "Not Support file types, please"})
+#except:
+    return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
 
 
 @app.errorhandler(500)
