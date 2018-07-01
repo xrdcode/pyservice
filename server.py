@@ -49,7 +49,7 @@ def extract_text():
     else:
         return jsonify({"error": "Not Support file types, please"})
 #except:
-    return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
+    #return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
 
 
 @app.errorhandler(500)
@@ -64,7 +64,7 @@ def not_found_error(error):
 def not_allowed_error(error):
     print(str(error))
 
-    
+
 app.debug = True
 
 if not app.debug:
