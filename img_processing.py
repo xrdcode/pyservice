@@ -22,7 +22,6 @@ def process_image(url=None,path=None,img=None):
     ret2,th2 = cv.threshold(gray,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
     dst = cv.fastNlMeansDenoising(th2,10,10,7)
     cao = Image.fromarray(dst)
-    print(type(dst))
     print ("Recongizeing...")
     rec_string =  pytesseract.image_to_string(cao,lang='ind')
     print ("the result is {}".format(rec_string))
