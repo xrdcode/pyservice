@@ -32,11 +32,11 @@ def upload():
     if not allowed(file.filename):
         return jsonify({"error":"unsupported file to uploads"})
     
-    try:
-        text = process_image(img=file.read())
-        return jsonify({"output":text})
-    except:
-        return jsonify({"error": "something when wrong"})
+#try:
+    text = process_image(img=file.read())
+    return jsonify({"output":text})
+#except:
+    #return jsonify({"error": "something when wrong"})
 
 @app.route('/extract_imgurl',methods=['POST'])
 def extract_text():
