@@ -15,8 +15,8 @@ def google_search(q="", **kwargs):
 ##This func will crawl the image title
 def crawler(text_to_search="", depth=1):
     result = []
+    start = 1
     for i in range(depth):
-        start = 1
         tmp = google_search('intitle:"'+text_to_search+'"', num=10, start=start)
         for j in range(len(tmp['items'])):
             tmpDict = {}
