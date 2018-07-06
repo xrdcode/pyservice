@@ -35,8 +35,8 @@ def upload():
     try:
         text = process_image(img=file.read())
         return jsonify({"output":text})
-    except:
-        return jsonify({"error": "something when wrong"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 @app.route('/extract_imgurl',methods=['POST'])
 def extract_text():
@@ -48,8 +48,8 @@ def extract_text():
             return jsonify({"output": rec_string })
         else:
             return jsonify({"error": "Not Support file types, please"})
-    except:
-        return jsonify({"error": "we only support [jpg, ,jpeg, png ,tif] or url like {'image_url': 'some_jpeg_url'}"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 
 @app.errorhandler(500)
